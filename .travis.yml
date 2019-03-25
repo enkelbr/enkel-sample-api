@@ -6,7 +6,6 @@ python:
   - "3.5-dev"
   - "3.6"
   - "3.6-dev"
-  - "3.7"
   - "3.7-dev"
 install:
   - pip install -r requirements_dev.txt
@@ -22,4 +21,4 @@ deploy:
   script: aws cloudformation deploy --template-file out.yaml --stack-name enkel-api --capabilities CAPABILITY_IAM
   skip_cleanup: true
   on:
-    python: "3.7"
+    python: "3.6"
