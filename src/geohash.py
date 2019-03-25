@@ -1,4 +1,18 @@
 import hashlib
+import json
+
+
+def handler(event, context):
+    lat = float(event['queryStringParameters']['latitude'])
+    lon = float(event['queryStringParameters']['longitude'])
+    date = bytes(event['queryStringParameters']['date'], 'utf-8')
+
+    body = json.dumps(geohash(lat, lon, date))
+
+    return {
+        "statusCode": 200,
+        "body": body
+    }
 
 
 def geohash(latitude, longitude, datedow):

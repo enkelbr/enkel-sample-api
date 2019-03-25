@@ -19,3 +19,15 @@ def test_geohash_no_coord():
 def test_geohash_no_date():
     with pytest.raises(TypeError):
         assert geohash.geohash(37.421542, -122.085589, None) is None
+
+
+def test_handler_success():
+    i = {
+        "queryStringParameters": {
+            "latitude": "37.421542",
+            "longitude": "-122.085589",
+            "date": "2005-05-26-10458.68"
+        }
+    }
+    r = {'statusCode': 200, 'body': '[37.857713, -122.544543]'}
+    assert geohash.handler(i, '') == r
