@@ -1,5 +1,5 @@
 import pytest
-import geohash
+from geohash import handler, geohash
 
 
 def test_geohash_success():
