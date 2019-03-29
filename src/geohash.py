@@ -7,11 +7,18 @@ def handler(event, context):
     lon = float(event['queryStringParameters']['longitude'])
     date = bytes(event['queryStringParameters']['date'], 'utf-8')
 
-    body = json.dumps(geohash(lat, lon, date))
+    coordinates = geohash(lat, lon, date)
+
+    url = 'https://www.google.com/maps/place/{},{}'.format(coordinates['latitude'], coordinates['longitude'])
+
+    body = {
+        'coordinates': coordinates,
+        'url': url
+    }
 
     return {
         "statusCode": 200,
-        "body": body
+        "body": json.dumps(body)
     }
 
 
@@ -23,4 +30,4 @@ def geohash(latitude, longitude, datedow):
     # https://xkcd.com/426/
     h = hashlib.md5(datedow).hexdigest()
     p, q = [('%f' % float.fromhex('0.' + x)) for x in (h[:16], h[16:32])]
-    return [float('%d%s' % (latitude, p[1:])), float('%d%s' % (longitude, q[1:]))]
+    return { 'latitude': float('%d%s' % (latitude, p[1:])), 'longitude': float('%d%s' % (longitude, q[1:]))}
