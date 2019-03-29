@@ -30,4 +30,4 @@ def geohash(latitude, longitude, datedow):
     # https://xkcd.com/426/
     h = hashlib.md5(datedow).hexdigest()
     p, q = [('%f' % float.fromhex('0.' + x)) for x in (h[:16], h[16:32])]
-    return { 'latitude': float('%d%s' % (latitude, p[1:])), 'longitude': float('%d%s' % (longitude, q[1:]))}
+    return {'latitude': float('%d%s' % (latitude, p[1:])), 'longitude': float('%d%s' % (longitude, q[1:]))}

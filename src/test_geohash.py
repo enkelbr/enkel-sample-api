@@ -3,7 +3,7 @@ import geohash
 
 
 def test_geohash_success():
-    assert geohash.geohash(37.421542, -122.085589, b'2005-05-26-10458.68') == [37.857713, -122.544543]
+    assert geohash.geohash(37.421542, -122.085589, b'2005-05-26-10458.68') == {'latitude': 37.857713, 'longitude': -122.544543}
 
 
 def test_geohash_string():
@@ -29,5 +29,6 @@ def test_handler_success():
             "date": "2005-05-26-10458.68"
         }
     }
-    r = {'statusCode': 200, 'body': '[37.857713, -122.544543]'}
+
+    r = {'statusCode': 200, 'body': '{"coordinates": {"latitude": 37.857713, "longitude": -122.544543}, "url": "https://www.google.com/maps/place/37.857713,-122.544543"}'}
     assert geohash.handler(i, '') == r
