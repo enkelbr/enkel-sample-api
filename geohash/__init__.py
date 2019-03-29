@@ -1,1 +1,0 @@
-from .geohash import handler
