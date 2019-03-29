@@ -1,6 +1,7 @@
 import hashlib
 import json
 import re
+from collections import OrderedDict
 
 
 def validate_url(input):
@@ -20,10 +21,10 @@ def handler(event, context):
 
     url = 'https://www.google.com/maps/place/{},{}'.format(coordinates['latitude'], coordinates['longitude'])
 
-    body = {
+    body = OrderedDict({
         'coordinates': coordinates,
         'url': url
-    }
+    })
 
     return {
         "statusCode": 200,
