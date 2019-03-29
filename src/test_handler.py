@@ -1,5 +1,6 @@
 import pytest
 import handler
+import json
 
 
 def test_geohash_success():
@@ -30,5 +31,12 @@ def test_handler_success():
         }
     }
 
-    r = {'statusCode': 200, 'body': '{"coordinates": {"latitude": 37.857713, "longitude": -122.544543}, "url": "https://www.google.com/maps/place/37.857713,-122.544543"}'}
+    coordinates = {"latitude": 37.857713, "longitude": -122.544543}
+    url = 'https://www.google.com/maps/place/37.857713,-122.544543'
+    body = {
+        'coordinates': coordinates,
+        'url': url
+    }
+
+    r = {'statusCode': 200, 'body': json.dumps(body)}
     assert handler.handler(i, '') == r
