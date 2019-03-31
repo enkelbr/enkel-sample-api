@@ -20,13 +20,21 @@ def handler(event, context):
 
     url = 'https://www.google.com/maps/place/{},{}'.format(coordinates['latitude'], coordinates['longitude'])
 
-    body = {
-        'coordinates': coordinates,
-        'url': url
-    }
+    if validate_url(url):
+        rc = 200
+        body = {
+            'coordinates': coordinates,
+            'url': url
+        }
+
+    else:
+        rc = 500
+        body = {
+            'errorMessage': "Error validating URL."
+        }
 
     return {
-        "statusCode": 200,
+        "statusCode": rc,
         "body": json.dumps(body)
     }
 
