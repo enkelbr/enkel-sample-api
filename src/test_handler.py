@@ -32,7 +32,7 @@ def test_handler_invalid_url(mocker):
             "date": "2005-05-26-10458.68"
         }
     }
-    
+
     body = {
         'errorMessage': "Error validating URL."
     }
